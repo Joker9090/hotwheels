@@ -17,7 +17,7 @@ export default class Boot extends Phaser.State {
     this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
 
     // Don't pause the game on blur.
-    this.game.stage.disableVisibilityChange = true;
+    //this.game.stage.disableVisibilityChange = true;
 
     // Disable clearing the canvas on each tick (usually not needed).
     this.game.clearBeforeRender = false;
@@ -27,9 +27,13 @@ export default class Boot extends Phaser.State {
 
     // Move on to the preload state.
 
-    // this.game.state.start('Preload');
+    this.game.state.start('Preload');
   }
   scaleStage() {
+
+    this.scale.hasResized.add(this.gameResized, this);
+    console.log(this.game.device.desktop);
+    /*
     if (this.game.device.desktop){
        this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
     }else{
@@ -64,12 +68,15 @@ export default class Boot extends Phaser.State {
 		// document.getElementById("game").style.width = window.innerWidth+"px";
 		// document.getElementById("game").style.height = window.innerHeight-1+"px";//The css for body includes 1px top margin, I believe this is the cause for this -1
 		document.getElementById("game").style.overflow = "hidden";
+    */
   }
-  
   gameResized(width, height) {
 
     //  This could be handy if you need to do any extra processing if the game resizes.
     //  A resize could happen if for example swapping orientation on a device.
+
+    //this.scale.setGameSize(window.innerWidth * window.devicePixelRatio, indow.innerHeight * window.devicePixelRatio);
+    console.log(12312);
 
   }
 

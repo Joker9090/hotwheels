@@ -3,6 +3,8 @@ import Boot from './states/Boot';
 import Preload from './states/Preload';
 import Main from './states/Main';
 
+process.env.NODE_ENV = 'development';
+
 /**
  * Setup the root class for the whole game.
  */
@@ -16,8 +18,8 @@ class Game extends Phaser.Game {
 
     // Setup the game's stage.
     super({
-      width: window.innerWidth * dpr,
-      height: window.innerHeight * dpr,
+      width: 720 * dpr, //window.innerWidth * dpr,
+      height: 480 * dpr, //window.innerHeight * dpr,
       renderer: Phaser.AUTO,
       antialias: true,
       multiTexture: true,
@@ -26,8 +28,8 @@ class Game extends Phaser.Game {
 
     // Setup the different game states.
     this.state.add('Boot', Boot, false);
-    // this.state.add('Preload', Preload, false);
-    // this.state.add('Main', Main, false);
+    this.state.add('Preload', Preload, false);
+    this.state.add('Main', Main, false);
 
     // Kick things off with the boot state.
     this.state.start('Boot');
@@ -60,5 +62,6 @@ class Game extends Phaser.Game {
     };
   }
 }
-
-new Game();
+window.onload = function(){
+  new Game();
+};
